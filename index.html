@@ -3,382 +3,289 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Nike</title>
+    <title>Nike.boom</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
         body {
-            background: #111;
+            background: #0f0f0f;
             color: #fff;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: "Helvetica Neue", Arial, sans-serif;
         }
 
-        .top-bar {
-            background: #1c1c1c;
-            font-size: 12px;
-            padding: 6px 30px;
+        section {
+            padding: 80px 0;
         }
 
-        .top-bar span {
-            margin-right: 15px;
-            color: #ccc;
-        }
-
-        .main-nav {
-            background: #111;
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: #0f0f0f;
             border-bottom: 1px solid #222;
         }
 
-        .main-nav a {
+        .nav-link {
             color: #fff;
             font-weight: 500;
-            margin: 0 12px;
+            margin: 0 10px;
             text-decoration: none;
+            cursor: pointer;
         }
 
-        .main-nav a:hover {
-            opacity: 0.8;
-        }
-
-        .page-header {
-            padding: 30px;
-        }
-
-        .breadcrumb {
-            color: #aaa;
-            font-size: 13px;
-        }
-
-        .page-title {
-            font-size: 28px;
-            font-weight: 600;
-        }
-
-        .actions {
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .product-card {
-            background: #dcdcdc;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .product-card img {
-            width: 100%;
-            transition: 0.4s;
-        }
-
-        .product-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            background: #111;
-            padding: 12px 0 0;
-        }
-
-        .product-info h6 {
-            font-size: 15px;
-            margin: 4px 0;
-        }
-
-        .price {
-            font-size: 14px;
-            color: #aaa;
-        }
-
-        @media(max-width:768px) {
-            .page-title {
-                font-size: 22px;
-            }
-        }
-
-        .container {
-            background-color: #111;
-            color: white;
+        .nav-link:hover {
+            opacity: 0.7;
         }
 
         .nike-logo {
             filter: invert(1);
         }
 
-        /* ===== HERO SLIDER (ADDED ONLY) ===== */
-        .hero-slider {
+        /* ===== HERO ===== */
+        .hero {
             position: relative;
-            height: 85vh;
+            height: 90vh;
             overflow: hidden;
         }
 
-        .hero-slide {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-        }
-
-        .hero-slide.active {
-            opacity: 1;
-        }
-
-        .hero-slide img {
+        .hero img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
         .hero-content {
             position: absolute;
-            bottom: 15%;
+            bottom: 20%;
             left: 8%;
-            color: white;
+            z-index: 2;
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
+            letter-spacing: -2px;
         }
 
         .hero-content p {
-            font-size: 1.1rem;
-            margin: 10px 0 20px;
+            color: #ddd;
+            max-width: 450px;
         }
 
-        .hero-content button {
-            background: white;
-            color: black;
-            border: none;
-            padding: 10px 22px;
-            font-weight: 600;
-        }
-
-        /* arrows */
-        .hero-prev,
-        .hero-next {
+        .hero-bar {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
+            bottom: 40px;
+            left: 8%;
+            height: 4px;
+            width: 0;
+            background: #fff;
+            transition: width 0.5s ease;
+            z-index: 2;
         }
 
-        .hero-prev {
-            left: 20px;
+        .hero:hover .hero-bar {
+            width: 180px;
         }
 
-        .hero-next {
-            right: 20px;
-        }
-
-        @media(max-width:768px) {
+        @media (max-width: 768px) {
             .hero-content h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
+        }
+
+        /* ===== PRODUCTS ===== */
+        .product-card {
+            position: relative;
+            background: #e5e5e5;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-overlay {
+            transform: translateY(0);
+        }
+
+        .product-overlay h6 {
+            margin-bottom: 5px;
+        }
+
+        .product-overlay span {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* ===== ABOUT ===== */
+        #about p {
+            color: #bbb;
+            max-width: 700px;
+        }
+
+        /* ===== CONTACT ===== */
+        .container {
+            background-color: #111;
+            color: white;
+        }
+
+        input,
+        textarea {
+            background: #111 !important;
+            border: 1px solid #333 !important;
+            color: #fff !important;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            border-top: 1px solid #222;
+            padding: 30px 0;
+            text-align: center;
+            color: #777;
         }
     </style>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg align-items-center fixed-top">
+        <div class="container position-relative">
 
-    <div class="top-bar d-flex justify-content-end">
-        <span>Find a Store</span>
-        <span>Help</span>
-        <span>Join Us</span>
-        <span>Sign In</span>
-    </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" height="18"
+                class="nike-logo position-absolute start-0">
 
-    <div class="main-nav d-flex align-items-center px-4 py-3">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" height="18" class="nike-logo">
-        <div class="mx-auto">
-            <a href="#">New & Featured</a>
-            <a href="#">Men</a>
-            <a href="#">Women</a>
-            <a href="#">Kids</a>
-            <a href="#">Sale</a>
-            <a href="#">Sneakers</a>
-        </div>
-        <i class="bi bi-search me-3"></i>
-        <i class="bi bi-heart me-3"></i>
-        <i class="bi bi-bag"></i>
-    </div>
-
-    <div class="page-header d-flex justify-content-between align-items-center">
-        <div>
-            <div class="breadcrumb">Air Jordan / Shoes</div>
-            <div class="page-title">Men's Jordan Shoes </div>
-        </div>
-        <div class="actions">
-            Show Filters &nbsp;&nbsp; Sort By
-        </div>
-    </div>
-
-    <!-- HERO SLIDER (ADDED ONLY) -->
-    <section class="hero-slider">
-
-        <div class="hero-slide active">
-            <img
-                src="https://static.nike.com/a/images/f_auto/dpr_1.3/h_700,c_limit/87e5f90e-1e45-45cc-8d9b-1f1b8b9a8c92/jordan.jpg">
-            <div class="hero-content">
-                <h1>JORDAN ESSENTIALS</h1>
-                <p>Built for flight. Styled for the streets.</p>
-                <button>Shop</button>
+            <div class="d-flex justify-content-center w-100">
+                <span class="nav-link d-inline" onclick="goTo('home')">Home</span>
+                <span class="nav-link d-inline" onclick="goTo('about')">About</span>
+                <span class="nav-link d-inline" onclick="goTo('products')">Products</span>
+                <span class="nav-link d-inline" onclick="goTo('contact')">Contact</span>
             </div>
         </div>
+    </nav>
 
-        <div class="hero-slide">
-            <img
-                src="https://static.nike.com/a/images/f_auto/dpr_1.3/h_700,c_limit/ef1c6a7f-6b8b-42ae-8f94-4d8a43b1b9ad/air-max.jpg">
-            <div class="hero-content">
-                <h1>AIR MAX</h1>
-                <p>Iconic cushioning. Modern comfort.</p>
-                <button>Explore</button>
-            </div>
+    <section id="home" class="hero">
+        <img src="images/image3.jpg">
+        <div class="hero-content">
+            <h1>JUST DO IT</h1>
+            <p>Minimal design. Maximum impact. Built for performance.</p>
+            <p>Style your fashion with stylish collections.</p>
         </div>
-
-        <div class="hero-slide">
-            <img
-                src="https://static.nike.com/a/images/f_auto/dpr_1.3/h_700,c_limit/9b2c7d2f-04a7-4b28-bcc4-1a96c66f0e1b/dunk.jpg">
-            <div class="hero-content">
-                <h1>DUNK LOW</h1>
-                <p>Classic hoops style redefined.</p>
-                <button>Buy Now</button>
-            </div>
-        </div>
-
-        <button class="hero-prev">&#10094;</button>
-        <button class="hero-next">&#10095;</button>
+        <div class="hero-bar"></div>
 
     </section>
 
-    <!--products-->
-    <section>
-        <div class="container-fluid px-4">
-            <div class="row g-4">
-                <!--1-->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img
-                            src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/3caf23f9-e189-460e-b5b9-d7a57f1d32b4/AIR+JORDAN+1+LOW.png">
-                    </div>
-                    <div class="product-info">
-                        <h6>Air Jordan 1 Low</h6>
-                        <div class="price">MRP : ₹8,995.00</div>
-                    </div>
-                </div>
-                <!--2-->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img
-                            src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/7b6d87f1-4bfb-4a82-8f6f-84630181a287/AIR+JORDAN+1+LOW+SE.png">
-                    </div>
-                    <div class="product-info">
-                        <h6>SB Dunks - Blue</h6>
-                        <div class="price">MRP : ₹11,995.00</div>
-                    </div>
-                </div>
-                <!--3-->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img
-                            src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/2a009a4f-f9ea-4bb3-8fb0-8cc4c0db1f1c/AIR+JORDAN+1+RETRO+LOW+OG+%28GS%29.png">
-                    </div>
-                    <div class="product-info">
-                        <h6>Chicago Bulls - Low</h6>
-                        <div class="price">MRP : ₹11,495.00</div>
-                    </div>
-                </div>
-                <!--4-->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img
-                            src="https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.3/h_520,c_limit/12359d89-6050-4d71-b487-d31e3b9ea564/ja-3-lunar-new-year-ep-basketball-shoes-s5LwQ251.png">
-                    </div>
-                    <div class="product-info">
-                        <h6>Air Max Ja 3</h6>
-                        <div class="price">MRP : ₹10,000.00</div>
-                    </div>
-                </div>
-                <!--5-->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img
-                            src="https://static.nike.com/a/images/c_limit,w_318,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/e90ccffa-5cde-4a15-8eb1-490519e16aa1/WMNS+AIR+JORDAN+1+RETRO+HI+OG.png">
-                    </div>
-                    <div class="product-info">
-                        <h6>Air Jordan 1 Retro High OG 'Pro Green'</h6>
-                        <div class="price">MRP : ₹15,995.00</div>
-                    </div>
-                </div>
-                <!--6-->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img
-                            src="https://static.nike.com/a/images/c_limit,w_318,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/711fb8d8-3154-4376-a068-0d5439bd6b64/JORDAN+SPIZIKE+LOW.png">
-                    </div>
-                    <div class="product-info">
-                        <h6>Air Jordan Spizikie Low/h6>
-                            <div class="price">MRP : ₹17,995.00</div>
-                    </div>
-                </div>
-                <!--7-->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img
-                            src="https://static.nike.com/a/images/c_limit,w_318,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/4b29d971-794f-4c87-af2c-2bd4632ae5fc/AIR+JORDAN+3+RETRO+MEX.png">
-                    </div>
-                    <div class="product-info">
-                        <h6>Air Jordan 3 Retro</h6>
-                        <div class="price">MRP : ₹20,995.00</div>
-                    </div>
-                </div>
-                <!--8-->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img
-                            src="https://static.nike.com/a/images/c_limit,w_318,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/3e25b89a-c6b8-4ffb-b040-9c8e53b9e702/AIR+JORDAN+1+MID+SE.png">
-                    </div>
-                    <div class="product-info">
-                        <h6>Air Jordan 1 Mid SE</h6>
-                        <div class="price">MRP : ₹9,995.00</div>
-                    </div>
-                </div>
-                <!--9-->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img
-                            src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/46cb6b9d-c022-4706-a6a5-e26a5818aa00/AIR+JORDAN+1+LOW+G+SPK.png">
-                    </div>
-                    <div class="product-info">
-                        <h6>Air Jordan 1 Low G</h6>
-                        <div class="price">MRP : ₹4,995.00</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="Contact" class="py-5 bg-light">
+    <!-- PRODUCTS -->
+    <section id="products">
         <div class="container">
-            <h2 class="fw-bold text-center mb-4">Contact Us</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-5">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body p-4">
-                            <form>
-                                <input type="text" class="form-control mb-3" placeholder="Your Name" required>
-                                <input type="email" class="form-control mb-3" placeholder="Your Email" required>
-                                <textarea class="form-control mb-4" rows="4" placeholder="Message"></textarea>
-                                <button class="btn btn-dark btn-lg w-100">Send Message</button>
-                            </form>
+            <h2 class="mb-5 fw-bold">Featured Products</h2>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="images/1.avif">
+                        <div class="product-overlay">
+                            <h6>Air Jordan 1 Low</h6>
+                            <span>₹9,999</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="images/2.avif">
+                        <div class="product-overlay">
+                            <h6>SB Dunks - Blue</h6>
+                            <span>₹12,999</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="images/3.avif">
+                        <div class="product-overlay">
+                            <h6>Chicago Bulls - Low</h6>
+                            <span>₹8,499</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="images/4.avif">
+                        <div class="product-overlay">
+                            <h6>Air Max Ja 3</h6>
+                            <span>₹9,999</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="images/5.avif">
+                        <div class="product-overlay">
+                            <h6>Air Jordan 1 Retro High OG 'Pro Green'</h6>
+                            <span>₹9,999</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="images/6.avif">
+                        <div class="product-overlay">
+                            <h6>Air Jordan Spizikie Low</h6>
+                            <span>₹9,999</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="images/7.avif">
+                        <div class="product-overlay">
+                            <h6>Air Jordan 3 Retro</h6>
+                            <span>₹9,999</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="images/8.avif">
+                        <div class="product-overlay">
+                            <h6>Air Jordan 1 Mid SE</h6>
+                            <span>₹9,999</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="images/9.avif">
+                        <div class="product-overlay">
+                            <h6>Air Jordan 1 Low G</h6>
+                            <span>₹9,999</span>
                         </div>
                     </div>
                 </div>
@@ -386,44 +293,42 @@
         </div>
     </section>
 
-    <footer class="mt-5 text-center">
-        <h6>2026 ShopEasy, All Rights Reserved</h6>
-        <i class="bi bi-facebook me-2"></i>
-        <i class="bi bi-youtube me-2"></i>
-        <i class="bi bi-instagram me-2"></i>
+    <section id="about">
+        <div class="container">
+            <h2 class="fw-bold mb-4">About Us</h2>
+            <p>
+                We design products for athletes, creators, and everyday performers.
+                Innovation, simplicity, and performance drive everything we build.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="fw-bold mb-4">Contact</h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="form-control mb-3" placeholder="Name">
+                    <input class="form-control mb-3" placeholder="Email">
+                    <textarea class="form-control mb-3" rows="4" placeholder="Message"></textarea>
+                    <button class="btn btn-light">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Nike Inspired UI. All Rights Reserved.
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-const slides = document.querySelectorAll(".hero-slide");
-const next = document.querySelector(".hero-next");
-const prev = document.querySelector(".hero-prev");
-
-let index = 0;
-
-function showSlide(i) {
-    slides.forEach(s => s.classList.remove("active"));
-    slides[i].classList.add("active");
-}
-
-next.onclick = () => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-};
-
-prev.onclick = () => {
-    index = (index - 1 + slides.length) % slides.length;
-    showSlide(index);
-};
-
-setInterval(() => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-}, 5000);
-</script>
-
+        function goTo(sectionId) {
+            document.getElementById(sectionId)
+                .scrollIntoView({ behavior: "smooth" });
+        }
+    </script>
 
 </body>
 
-</html>
+</html> check and remove the unnecessary lines
