@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .back {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .main-img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .size-btn {
+            border: 1px solid #555;
+            background: transparent;
+            color: #fff;
+            padding: 8px 16px;
+            margin: 5px;
+        }
+
+        .size-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-5">
+        <div class="glass p-4 p-md-5 rounded-4">
+            <a href="index.html" class="back">Back</a>
+
+            <div class="row mt-4">
+
+                <!-- LEFT -->
+                <div class="col-md-6">
+                    <img id="mainImage" class="main-img mb-3">
+                </div>
+
+                <!-- RIGHT -->
+                <div class="col-md-6">
+                    <h2 id="productName"></h2>
+                    <h4 class="my-3" id="productPrice"></h4>
+                    <p id="productDesc" class="text-secondary"></p>
+
+                    <h6 class="mt-4">Select Size</h6>
+                    <div>
+                        <button class="size-btn">6</button>
+                        <button class="size-btn">7</button>
+                        <button class="size-btn">8</button>
+                        <button class="size-btn">9</button>
+                        <button class="size-btn">10</button>
+                    </div>
+
+                    <button class="btn btn-light mt-4 px-5">Add to Cart</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = {
+            1: { name: "Air Jordan Low 1", price: "₹10,999", desc: "Black and white with a brand logo.", images: ["images/1.avif", "images/2.avif", "images/3.avif"] },
+            2: { name: "Nike Dunk Low", price: "₹9,499", desc: "Classic dunk low street style.", images: ["images/2.avif", "images/2-2.avif", "images/2-3.avif"] },
+            3: { name: "Air Force 1", price: "₹8,999", desc: "Legendary AF1 comfort.", images: ["images/3.avif", "images/3-2.avif", "images/3-3.avif"] },
+            4: { name: "Jordan Mid", price: "₹11,499", desc: "High ankle mid-top design.", images: ["images/4.avif", "images/4-2.avif", "images/4-3.avif"] },
+            5: { name: "Nike Blazer", price: "₹7,999", desc: "Retro basketball vibe.", images: ["images/5.avif", "images/5-2.avif", "images/5-3.avif"] },
+            6: { name: "Jordan Zoom", price: "₹12,999", desc: "Zoom air cushioning.", images: ["images/6.avif", "images/6-2.avif", "images/6-3.avif"] },
+            7: { name: "Nike Court Vision", price: "₹6,499", desc: "Minimal court design.", images: ["images/7.avif", "images/7-2.avif", "images/7-3.avif"] },
+            8: { name: "Jordan Legacy", price: "₹13,499", desc: "Premium leather finish.", images: ["images/8.avif", "images/8-2.avif", "images/8-3.avif"] },
+            9: { name: "Nike Revolution", price: "₹5,999", desc: "Lightweight everyday wear.", images: ["images/9.avif", "images/9-2.avif", "images/9-3.avif"] },
+            10: { name: "Jordan Retro", price: "₹14,999", desc: "Iconic retro look.", images: ["images/10.avif", "images/10-2.avif", "images/10-3.avif"] }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id") || 1;
+        const product = products[id];
+
+        document.getElementById("productName").textContent = product.name;
+        document.getElementById("productPrice").textContent = product.price;
+        document.getElementById("productDesc").textContent = product.desc;
+
+        const mainImg = document.getElementById("mainImage");
+
+        mainImg.src = product.images[0];
+
+        mainImg.src = product.images[0];
+
+        document.body.style.backgroundImage =
+            `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(${product.images[0]})`;
+
+    </script>
+
+</body>
+
+</html>
